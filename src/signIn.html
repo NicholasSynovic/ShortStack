@@ -28,19 +28,12 @@
     <main style>
         <section>
             <article id="content">
-                <div id="icon-container">
-                    <img src="./img/layers.png" class="icon">
-                </div>
-                <div id="app-info">
-                    <h1>ShortStack Messaging</h1>
-                    <p>Proof of concept secure chat PWA</p>
-                    <p>Application made by Nicholas Synovic</p>
-                    <p>Icons made by <a
-                            href="https://www.flaticon.com/authors/bukeicon"
-                            title="bukeicon">bukeicon</a> from <a
-                            href="https://www.flaticon.com/"
-                            title="Flaticon">www.flaticon.com</a></p>
-                </div>
+                <form id="form" style="text-align: center; display: grid; grid-template-rows: 1fr 1fr 1fr; row-gap: 2vw;">
+                    <input type="email" name="email" placeholder="Email Address" required="true">
+                    <input type="password" name="password" placeholder="Password" minlength="6" required="true">
+                    <button>Sign In</button>
+                </form>
+            </div>
             </article>
         </section>
     </main>
