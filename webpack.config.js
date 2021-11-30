@@ -12,7 +12,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: "ShortStack Messaging",
-            template: "./src/index_template.html",
+            template: "./src/index.html",
             minify: true
     }),
         new CopyPlugin({
