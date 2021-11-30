@@ -21,8 +21,13 @@ const authentication = getAuth()
 // Firebase Authentication
 
 // Helper functions
-onAuthStateChanged(authentication, (user) => {
-    console.log(user)
+const unsubcribeFromAuthenticationStateChanges = onAuthStateChanged(authentication, (user) => {
+    if (user == null) {
+        unsubcribeFromAuthenticationStateChanges()
+    }
+    else {
+        console.log(user)
+    }
 })
 
 function signOutOfApp(page) {
@@ -33,6 +38,7 @@ function signOutOfApp(page) {
         .catch(err => {
             alert(err.message)
         })
+    unsubcribeFromAuthenticationStateChanges()
 }
 
 /*
