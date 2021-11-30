@@ -170,9 +170,9 @@ Custom Hello {User} Text
 
 let currentLocation = window.location.href
 if (currentLocation.includes("app/index.html")) {
-    const helloUser = document.getElementById("displayName-greeting")
+    const displayNameGreeting = document.getElementById("displayName-greeting")
     onAuthStateChanged(authentication, (user) => {
-        helloUser.innerText = "Hello, " + user.displayName
+        displayNameGreeting.innerText = "Hello, " + user.displayName
     })
 }
 
