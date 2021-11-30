@@ -1,4 +1,5 @@
 name: Build and GH-Page Deploy
+# https://javascript.plainenglish.io/continuously-deploy-static-pages-with-github-actions-gh-pages-207e4a009d1c#2381
 
 on:
   workflow_dispatch:
