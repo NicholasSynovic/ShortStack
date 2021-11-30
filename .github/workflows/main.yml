@@ -1,30 +1,28 @@
 name: Build and GH-Page Deploy
 
 on:
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                persist-credentials: false
+    steps:
+      - uses: actions/checkout@v2
 
-        - name: Install
-            run: yarn install
+      - name: Install Dependencies
+        run: yarn install
 
-        - name: Build
-            run: |
-            yarn autoclean
-            yarn build
+      - name: Build site
+      run: |
+        yarn autoclean
+        yarn build
 
-        - name: Deploy to GH Page
-            uses: JamesIves/github-pages-deploy-action@4.1.1
-            with:
-            branch: gh-pages
-            folder: dist
+      - name: Deploy to GH Page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
