@@ -20,7 +20,71 @@ const authentication = getAuth()
 
 // Firebase Authentication
 
-// Sign Up
+// Helper functions
+
+function signOutOfApp(page) {
+    signOut(authentication)
+        .then(() => {
+            location.href = page
+        })
+        .catch(err => {
+            alert(err.message)
+        })
+}
+
+/*
+Sign Up Button
+--------------
+Conditions:
+* Only works on the top level pages
+    - /index.html
+    - /signIn.html
+
+User Stories:
+* If the sign up button is clicked, and the user is not logged in, show the sign up page
+* If the sign up button is clicked, and the user is logged in, show the app home page
+*/
+if (document.body.contains(document.getElementById("signUp-button"))) {
+    const signUpButton = document.getElementById("signUp-button")
+    signUpButton.addEventListener("click", () => {
+        if (authentication.currentUser != null) {
+            location.href = "app/index.html"
+        }
+    })
+}
+
+/*
+Sign In Button
+--------------
+Conditions:
+* Only works on the top level pages
+    - /index.html
+    - /signUp.html
+
+User Stories:
+* If the sign in button is clicked, and the user is not logged in, show the sign in page
+* If the sign in button is clicked, and the user is logged in, show the app home page
+*/
+if (document.body.contains(document.getElementById("signIn-button"))) {
+    const signUpButton = document.getElementById("signIn-button")
+    signUpButton.addEventListener("click", () => {
+        if (authentication.currentUser != null) {
+            location.href="app/index.html"
+        }
+    })
+}
+
+/*
+Sign Up Form
+------------
+Conditions:
+* Only works on /signUp.html
+
+User Stories:
+* User must enter a display name, email address, and password
+* On submit, a new user is created in the Firebase Authentication if the email is not in use
+* After the account is created, the user is logged on and sent to the app home screen
+*/
 if (document.body.contains(document.getElementById("signUp-form")))  {
     const signUpForm = document.getElementById("signUp-form")
     signUpForm.addEventListener("submit", (e) => {
@@ -53,13 +117,7 @@ if (document.body.contains(document.getElementById("signUp-form")))  {
 if (document.body.contains(document.getElementById("logout-button"))) {
     const signOutButton = document.getElementById("logout-button")
     signOutButton.addEventListener("click", () => {
-        signOut(authentication)
-            .then(() => {
-                location.href = "../index.html"
-            })
-            .catch(err => {
-                alert(err.message)
-            })
+        signOutOfApp("../index.html")
     })
 }
 
