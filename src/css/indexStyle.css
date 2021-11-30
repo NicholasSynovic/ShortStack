@@ -28,7 +28,11 @@
     border-style: solid;
 }
 
-#big-icon   {
+#icon-container {
+    text-align: center;
+}
+
+.icon   {
     max-height: 100%;
     max-width: 100%;
 }
