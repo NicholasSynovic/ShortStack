@@ -12,4 +12,8 @@
 
 ## Resources
 
-- [Firebase 9 Tutorial by *The Net Ninja*](https://www.youtube.com/playlist?list=PL4cUxeGkcC9jERUGvbudErNCeSZHWUVlb)
+- [Firebase 9 Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9jERUGvbudErNCeSZHWUVlb) by *The Net Ninja*
+
+## Credits
+
+- Icons made by [bukeicon](https://www.flaticon.com/authors/bukeicon) from [www.flaticon.com](https://www.flaticon.com/)
