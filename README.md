@@ -2,6 +2,8 @@
 
 ## Notes About This Application
 
+- This site can be viewed live at [nicholassynovic.github.io/ShortStack/index.html](https://nicholassynovic.github.io/ShortStack/index.html)
+
 ### Tech Stack
 
 - Vanilla HTML, CSS, and JS
