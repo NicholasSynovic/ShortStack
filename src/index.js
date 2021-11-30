@@ -21,6 +21,9 @@ const authentication = getAuth()
 // Firebase Authentication
 
 // Helper functions
+onAuthStateChanged(authentication, (user) => {
+    console.log(user)
+})
 
 function signOutOfApp(page) {
     signOut(authentication)
@@ -113,15 +116,17 @@ if (document.body.contains(document.getElementById("signUp-form")))  {
     })
 }
 
-// Sign Out
-if (document.body.contains(document.getElementById("logout-button"))) {
-    const signOutButton = document.getElementById("logout-button")
-    signOutButton.addEventListener("click", () => {
-        signOutOfApp("../index.html")
-    })
-}
+/*
+Sign In Form
+------------
+Conditions:
+* Only works on /signIn.html
 
-// Sign in
+User Stories:
+* User must enter an email address and password
+* On submit, credentials are checked against the Firebase Authentication to see if the account exists
+* After the account is checked, the user is logged on and sent to the app home screen
+*/
 if (document.body.contains(document.getElementById("signIn-form"))) {
     const signInForm = document.getElementById("signIn-form")
     signInForm.addEventListener("submit", (e) => {
@@ -131,7 +136,7 @@ if (document.body.contains(document.getElementById("signIn-form"))) {
         const password = signInForm.password.value
 
         signInWithEmailAndPassword(authentication, email, password)
-            .then((credential) => {
+            .then(() => {
                 signInForm.reset()
                 location.href = "app/index.html"
             })
@@ -141,9 +146,23 @@ if (document.body.contains(document.getElementById("signIn-form"))) {
     })
 }
 
-onAuthStateChanged(authentication, (user) => {
-    console.log(user)
-})
+/*
+Sign Out Button
+---------------
+Conditions:
+* Only works on the app pages
+    - app/*.html
+
+User Stories:
+* If the sign out button is clicked, and the user is logged in, sign the user out and then show the root home page
+*/
+if (document.body.contains(document.getElementById("logout-button"))) {
+    const signOutButton = document.getElementById("logout-button")
+    signOutButton.addEventListener("click", () => {
+        signOutOfApp("../index.html")
+    })
+}
+
 // const firestore = getFirestore()
 // const collectionReference = collection(firestore, "books")
 
