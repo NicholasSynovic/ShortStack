@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "npm": "^8.1.4"
+  },
+  "name": "shortstack",
+  "description": "## Notes About This Application",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicholasSynovic/ShortStack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicholasSynovic/ShortStack/issues"
+  },
+  "homepage": "https://github.com/NicholasSynovic/ShortStack#readme"
+}
