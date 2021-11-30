@@ -5,8 +5,9 @@
 ### Tech Stack
 
 - Vanilla HTML, CSS, and JS
-- Firebase 9
-  - Uses webpack to bundle code into a single JS file
+- [Firebase 9](https://firebase.google.com/)
+- [webpack](https://webpack.js.org)
+  - [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin)
 
 ## Resources
 
