@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app"
-import { getAnalytics } from "firebase/analytics"
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
+// import { getAnalytics } from "firebase/analytics"
 // import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore"
 
 const firebaseConfig = {
@@ -15,51 +15,69 @@ const firebaseConfig = {
 
 // Initialize Firebase Components
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 const authentication = getAuth()
+// const analytics = getAnalytics(app);
 
 // Firebase Authentication
 
 // Sign Up
-const signUpForm = document.getElementById("signUp-form")
-signUpForm.addEventListener("submit", (e) => {
-    e.preventDefault()
+if (document.body.contains(document.getElementById("signUp-form")))  {
+    const signUpForm = document.getElementById("signUp-form")
+    signUpForm.addEventListener("submit", (e) => {
+        e.preventDefault()
 
-    const email = signUpForm.email.value
-    const password = signUpForm.password.value
+        const displayName = signUpForm.displayName.value
+        const email = signUpForm.email.value
+        const password = signUpForm.password.value
 
-    createUserWithEmailAndPassword(authentication, email, password)
-        .then((credential) => {
-            signUpForm.reset()
-            location.href = "app/index.html"
-            // console.log("user created", credential.user)
-        })
-        .catch(err => {
-            alert(err.message)
-        })
-    authetnicationForm.reset()
-})
+        createUserWithEmailAndPassword(authentication, email, password)
+            .then((credential) => {
+                signUpForm.reset()
+                location.href = "app/index.html"
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+    })
+}
+
+// Sign Out
+if (document.body.contains(document.getElementById("logout-button"))) {
+    const signOutButton = document.getElementById("logout-button")
+    signOutButton.addEventListener("click", () => {
+        signOut(authentication)
+            .then(() => {
+                location.href = "../index.html"
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+    })
+}
 
 // Sign in
-const signInForm = document.getElementById("signIn-form")
-signInForm.addEventListener("submit", (e) => {
-    e.preventDefault()
+if (document.body.contains(document.getElementById("signIn-form"))) {
+    const signInForm = document.getElementById("signIn-form")
+    signInForm.addEventListener("submit", (e) => {
+        e.preventDefault()
 
-    const email = signInForm.email.value
-    const password = signInForm.password.value
+        const email = signInForm.email.value
+        const password = signInForm.password.value
 
-    createUserWithEmailAndPassword(authentication, email, password)
-        .then((credential) => {
-            signInForm.reset()
-            location.href = "app/index.html"
-            // console.log("user created", credential.user)
-        })
-        .catch(err => {
-            alert(err.message)
-        })
-    authetnicationForm.reset()
+        signInWithEmailAndPassword(authentication, email, password)
+            .then((credential) => {
+                signInForm.reset()
+                location.href = "app/index.html"
+            })
+            .catch(err => {
+                alert(err.message)
+            })
+    })
+}
+
+onAuthStateChanged(authentication, (user) => {
+    console.log(user)
 })
-
 // const firestore = getFirestore()
 // const collectionReference = collection(firestore, "books")
 

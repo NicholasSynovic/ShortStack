@@ -4,3 +4,11 @@
     row-gap: 2vw;
     text-align: center;
 }
+
+#signUp-form    {
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+#signIn-form    {
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
