@@ -1,8 +1,10 @@
+// Imports
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
 // import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore"
 
+// Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyAWLtpyFyzKHGliA5I57DzIEJDdPxna9M8",
     authDomain: "shortstack-messaging.firebaseapp.com",
@@ -21,15 +23,6 @@ const authentication = getAuth()
 // Firebase Authentication
 
 // Helper functions
-const unsubcribeFromAuthenticationStateChanges = onAuthStateChanged(authentication, (user) => {
-    if (user == null) {
-        unsubcribeFromAuthenticationStateChanges()
-    }
-    else {
-        console.log(user)
-    }
-})
-
 function signOutOfApp(page) {
     signOut(authentication)
         .then(() => {
@@ -38,7 +31,6 @@ function signOutOfApp(page) {
         .catch(err => {
             alert(err.message)
         })
-    unsubcribeFromAuthenticationStateChanges()
 }
 
 /*
@@ -166,6 +158,21 @@ if (document.body.contains(document.getElementById("logout-button"))) {
     const signOutButton = document.getElementById("logout-button")
     signOutButton.addEventListener("click", () => {
         signOutOfApp("../index.html")
+    })
+}
+
+// Application Logic
+
+/*
+Custom Hello {User} Text
+------------------------
+*/
+
+let currentLocation = window.location.href
+if (currentLocation.includes("app/index.html")) {
+    const helloUser = document.getElementById("displayName-greeting")
+    onAuthStateChanged(authentication, (user) => {
+        helloUser.innerText = "Hello, " + user.displayName
     })
 }
 
