@@ -16,9 +16,10 @@ module.exports = {
             minify: true
     }),
         new CopyPlugin({
-            patterns: [{
-                from: "./src/img", to: "img"
-            }],
+            patterns: [
+                { from: "./src/img", to: "img" },
+                { from: "./src/css", to: "css" }
+            ],
         })
     ],
     watch: true

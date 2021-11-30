@@ -4,28 +4,28 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/indexStyle.css">
         <title>ShortStack Messaging</title>
     </head>
     <body>
         <!-- <header></header> -->
-        <nav id="nav-bar" style="display: grid; grid-template-columns: 3fr 1fr 1fr; column-gap: 1vw; border-radius: 1vw; border-color: red; border-style: solid; padding: 1vw; margin: 1vw; height: fit-content; position: sticky; top: 0px; background-color: blue;">
-            <div style="background-color: white; width: 100%; height: 100%;">
+        <nav id="nav-bar">
+            <div class="nav-item">
                 <h3>ShortStack Messaging</h4>
             </div>
-            <div style="background-color: white; width: 100%; height: 100%;">
+            <div class="nav-item">
                 <button id="signIn" style="width: 100%; height: 100%;">Sign In</button>
             </div>
-            <div style="background-color: white; width: 100%; height: 100%;">
+            <div class="nav-item">
                 <button id="signUp" style="width: 100%; height: 100%;">Sign Up</button>
             </div>
         </nav>
         <main style>
-            <section id="page">
-                <article id="frontmatter-grid" style="display: grid; grid-template-rows: 1fr 100%; border-radius: 1vw; border-color: blue; border-style: solid; padding: 1vw; margin: 1vw; height: auto;">
-                    <div style="text-align: center;">
-                        <img src="./img/layers.png" style="max-height: 100%; max-width: 100%;">
+            <section>
+                <article id="content">
+                        <img src="./img/layers.png" id="big-icon">
                     </div>
-                    <div style="text-align: center; height: fit-content;">
+                    <div id="app-info">
                         <h1>ShortStack Messaging</h1>
                         <p>Proof of concept secure chat PWA</p>
                         <p>Application made by Nicholas Synovic</p>
