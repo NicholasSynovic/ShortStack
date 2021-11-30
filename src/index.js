@@ -71,6 +71,7 @@ deleteBookForm.addEventListener("submit", (e) => {
 })
 
 // Firebase Authentication
+// Create User
 const authetnicationForm = document.getElementById("authentication")
 authetnicationForm.addEventListener("submit", (e) => {
     e.preventDefault()
