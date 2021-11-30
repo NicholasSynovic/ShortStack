@@ -14,11 +14,24 @@ module.exports = {
             title: "ShortStack Messaging",
             template: "./src/index.html",
             minify: true
-    }),
+        }),
+        new HtmlWebpackPlugin({
+            title: "ShortStack Messaging",
+            filename: "signIn.html",
+            template: "./src/signIn.html",
+            minify: true
+        }),
+        new HtmlWebpackPlugin({
+            title: "ShortStack Messaging",
+            filename: "signUp.html",
+            template: "./src/signUp.html",
+            minify: true
+        }),
         new CopyPlugin({
             patterns: [
                 { from: "./src/img", to: "img" },
-                { from: "./src/css", to: "css" }
+                { from: "./src/css", to: "css" },
+                // { from: "./src/js", to: "js" }
             ],
         })
     ],
