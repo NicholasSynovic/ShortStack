@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
-import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"
+import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore"
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
 
 const firebaseConfig = {
     apiKey: "AIzaSyAWLtpyFyzKHGliA5I57DzIEJDdPxna9M8",
@@ -18,20 +19,30 @@ const analytics = getAnalytics(app);
 
 // Initalize Firestore
 const firestore = getFirestore()
+const authentication = getAuth()
 
 // Reference collection in Firestore
 const collectionReference = collection(firestore, "books")
 
-// Print out all objects in the collection
-getDocs(collectionReference).then((snapshot) => {
+// Print out all objects in the collection REQUIRES REFRESH TO VIEW NEW DATA
+// getDocs(collectionReference).then((snapshot) => {
+//     let books = []
+//     snapshot.docs.forEach((doc) => {
+//         books.push({...doc.data(), id: doc.id})
+//     })
+//     console.log(books)
+// })
+//     .catch(err => {
+//         console.log(err.message)
+// })
+
+// Print out all objects in the collection IN REAL TIME
+onSnapshot(collectionReference, (snapshot) => {
     let books = []
     snapshot.docs.forEach((doc) => {
-        books.push({...doc.data(), id: doc.id})
+        books.push({ ...doc.data(), id: doc.id })
     })
     console.log(books)
-})
-    .catch(err => {
-        console.log(err.message)
 })
 
 // Add book to FireStore Books collection
@@ -57,4 +68,22 @@ deleteBookForm.addEventListener("submit", (e) => {
     deleteDoc(documentReference).then(() => {
         deleteBookForm.reset()
     })
+})
+
+// Firebase Authentication
+const authetnicationForm = document.getElementById("authentication")
+authetnicationForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    const email = authetnicationForm.email.value
+    const password = authetnicationForm.password.value
+
+    createUserWithEmailAndPassword(authentication, email, password)
+        .then((credential) => {
+            console.log("user created", credential.user)
+        })
+        .catch(err => {
+            console.log(err.message)
+        })
+    authetnicationForm.reset()
 })
