@@ -1,0 +1,6 @@
+#form {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 2vw;
+    text-align: center;
+}
