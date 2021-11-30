@@ -27,6 +27,12 @@ module.exports = {
             template: "./src/signUp.html",
             minify: true
         }),
+        new HtmlWebpackPlugin({
+            title: "ShortStack Messaging",
+            filename: "app/index.html",
+            template: "./src/app/index.html",
+            minify: true
+        }),
         new CopyPlugin({
             patterns: [
                 { from: "./src/img", to: "img" },
