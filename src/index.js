@@ -104,7 +104,7 @@ if (document.body.contains(document.getElementById("signUp-form")))  {
         const password = signUpForm.password.value
 
         createUserWithEmailAndPassword(authentication, email, password)
-            .then((credential) => {
+            .then(() => {
                 updateProfile(authentication.currentUser, {
                     displayName: displayName,
                 })
