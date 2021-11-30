@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
 // import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore"
 
@@ -32,8 +32,16 @@ if (document.body.contains(document.getElementById("signUp-form")))  {
 
         createUserWithEmailAndPassword(authentication, email, password)
             .then((credential) => {
-                signUpForm.reset()
-                location.href = "app/index.html"
+                updateProfile(authentication.currentUser, {
+                    displayName: displayName,
+                })
+                    .then(() => {
+                        signUpForm.reset()
+                        location.href = "app/index.html"
+                    })
+                    .catch(err => {
+                        alert(err.message)
+                    })
             })
             .catch(err => {
                 alert(err.message)
