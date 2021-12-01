@@ -99,6 +99,7 @@ if (document.body.contains(document.getElementById("signUp-form")))  {
             .then(() => {
                 updateProfile(authentication.currentUser, {
                     displayName: displayName,
+                    photoURL: `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random * 42069)}.svg`
                 })
                     .then(() => {
                         signUpForm.reset()
