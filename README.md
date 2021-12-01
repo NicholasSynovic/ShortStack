@@ -13,6 +13,7 @@
   - [copy-webpack-plugin](https://webpack.js.org/plugins/copy-webpack-plugin/)
 - [GitHub Actions](https://github.com/features/actions)
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages)
+- [Dicebear Avatars API](https://avatars.dicebear.com/)
 
 ### Resources
 
