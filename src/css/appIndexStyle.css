@@ -1,3 +1,8 @@
+body    {
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
 #nav-bar    {
     height: fit-content;
     display: grid;
@@ -17,6 +22,17 @@
     height: 100%
 }
 
+#profile    {
+    display: grid;
+    grid-template-columns: 0.1fr 1fr;
+    row-gap: 0vw;
+}
+
+#profile-icon   {
+    width: 50px;
+    height: 50px;
+}
+
 .button {
     height: 100%;
     width: 100%;
@@ -25,24 +41,11 @@
 #content    {
     height: auto;
     display: grid;
-    grid-template-rows: 1fr 100%;
+    grid-template-columns: 1fr 4fr;
+    column-gap: 2vw;
     padding: 1vw;
     margin: 1vw;
     border-radius: 1vw;
     border-color: blue;
     border-style: solid;
-}
-
-#icon-container {
-    text-align: center;
-}
-
-.icon   {
-    max-height: 100%;
-    max-width: 100%;
-}
-
-#app-info   {
-    height: fit-content;
-    text-align: center;
 }
