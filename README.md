@@ -14,6 +14,8 @@
 - [GitHub Actions](https://github.com/features/actions)
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages)
 - [Dicebear Avatars API](https://avatars.dicebear.com/)
+- [Spectral Font](https://fonts.google.com/specimen/Spectral#standard-styles) by *Production Type*
+- [Karla Font](https://fonts.google.com/specimen/Karla) by *Jonny Pinhorn*
 
 ### Resources
 
