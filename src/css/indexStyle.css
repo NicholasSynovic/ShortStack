@@ -31,12 +31,14 @@ body    {
 #content    {
     height: auto;
     display: grid;
-    grid-template-rows: 1fr 100%;
+    grid-template-rows: 1fr auto;
+    row-gap: 1vw;
     padding: 1vw;
     margin: 1vw;
     border-radius: 1vw;
     border-color: blue;
     border-style: solid;
+    overflow: auto;
 }
 
 #icon-container {
