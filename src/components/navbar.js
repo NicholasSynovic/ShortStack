@@ -56,14 +56,14 @@ function navbarApp() {
         <div class="nav-item" onclick="location.href='../index.html'">
             <h3>ShortStack Messaging</h3>
         </div>
-        <div class="nav-item">
+        <div class="nav-item-lesser-round">
             <section id="profile">
                 <img id="profile-icon" alt="">
-                <h3 id="displayName-greeting">Hello, {User}</h3>
+                <h3 id="displayName-greeting">{User}</h3>
             </section>
         </div>
         <div class="nav-item">
-            <button id="logout-button" class="button">Sign Out</button>
+            <button id="logout-button" class="nav-button">Sign Out</button>
         </div>
     `
     navbarContainer.appendChild(template.content)

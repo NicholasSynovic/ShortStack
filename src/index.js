@@ -174,7 +174,7 @@ if (currentLocation.includes("app/index.html")) {
     const displayNameGreeting = document.getElementById("displayName-greeting")
     const profileIcon = document.getElementById("profile-icon")
     onAuthStateChanged(authentication, (user) => {
-        displayNameGreeting.innerText = "Hello, " + user.displayName
+        displayNameGreeting.innerText = user.displayName
         profileIcon.src = user.photoURL
     })
 }
