@@ -1,41 +1,24 @@
 body    {
     padding-left: 10vw;
     padding-right: 10vw;
+    min-height: 50vh;
+    min-width: 50vw;
+    max-height: 100vh;
+    max-width: 100vw;
 }
 
-#nav-bar    {
-    height: fit-content;
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    column-gap: 1vw;
-    padding: 1vw;
-    margin: 1vw;
-    position: sticky;
-    top: 0px;
-    border-radius: 1vw;
-    border-color: red;
-    border-style: solid;
-}
-
-.nav-item   {
-    width: 100%;
-    height: 100%
-}
-
-.button {
-    height: 100%;
-    width: 100%;
-}
 
 #content    {
     height: auto;
     display: grid;
-    grid-template-rows: 1fr 100%;
+    grid-template-rows: 1fr auto;
+    row-gap: 1vw;
     padding: 1vw;
     margin: 1vw;
     border-radius: 1vw;
     border-color: blue;
     border-style: solid;
+    overflow: auto;
 }
 
 .login-form {
