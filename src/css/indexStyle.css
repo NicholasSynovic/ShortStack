@@ -28,7 +28,7 @@ body    {
     width: 100%;
 }
 
-#content    {
+#about    {
     height: auto;
     display: grid;
     grid-template-rows: 1fr auto;
