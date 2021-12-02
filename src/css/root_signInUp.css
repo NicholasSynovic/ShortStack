@@ -10,7 +10,7 @@ body    {
 
 
 #content    {
-    height: auto;
+    height: 53vh;
     display: grid;
     grid-template-rows: 1fr auto;
     row-gap: 1vw;

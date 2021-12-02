@@ -1,5 +1,5 @@
 #about    {
-    height: 80vh;
+    height: 77vh;
     display: grid;
     grid-template-rows: 1fr auto;
     row-gap: 1vh;

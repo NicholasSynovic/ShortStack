@@ -10,7 +10,7 @@ body    {
 }
 
 #content    {
-    height: 80vh;
+    height: 77vh;
     display: grid;
     grid-template-columns: 1fr 4fr;
     column-gap: 2vw;
