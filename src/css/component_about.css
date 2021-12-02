@@ -1,8 +1,8 @@
 #about    {
-    height: auto;
+    height: 80vh;
     display: grid;
     grid-template-rows: 1fr auto;
-    row-gap: 1vw;
+    row-gap: 1vh;
     padding: 1vw;
     margin: 1vw;
     border-radius: 1vw;
