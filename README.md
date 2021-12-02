@@ -19,6 +19,7 @@
 
 - [Firebase 9 Tutorial](https://www.youtube.com/playlist?list=PL4cUxeGkcC9jERUGvbudErNCeSZHWUVlb) by *The Net Ninja*
 - [Continuously Deploy Static Pages with Github Actions & gh-pages](https://javascript.plainenglish.io/continuously-deploy-static-pages-with-github-actions-gh-pages-207e4a009d1c) by *Parthipan Natkunam*
+- [Reusable HTML Components – How to Reuse a Header and Footer on a Website](https://www.freecodecamp.org/news/reusable-html-components-how-to-reuse-a-header-and-footer-on-a-website/) by *Kris Koishigawa*
 
 ### Credits
 

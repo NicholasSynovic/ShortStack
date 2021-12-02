@@ -46,8 +46,32 @@
                 </aside>
             </article>
         </section>
-        <section style="border: black solid; width: 100%; height: 100%;">
-            <article><h1>Hello World</h1></article>
+        <section style="border: black solid; width: 100%; height: 500px;">
+            <article>
+                <table style="width: 100%; height: 100%">
+                    <tbody id="posts" style="width: 100%; height: 10vw;">
+                        <tr style="height: 20%;">
+                            <td style="width: 50%; border: black solid;">Other</td>
+                            <td style="width: 50%"></td>
+                        </tr>
+                        <tr style="height: 20%;">
+                            <td style="width: 50%"></td>
+                            <td style="width: 50%; border: black solid;">Other</td>
+                        </tr>
+                    </tbody>
+                    <tfoot id="text">
+                        <tr>
+                            <td colspan="2">
+                                <form>
+                                    <input type="text" name="messages" required="true" placeholder=" Message" style="width: 90%; height: 100%;">
+                                    <input type="submit" value="Post">
+                                </form>
+                            </td>
+                        </tr>
+
+                    </tfoot>
+                </table>
+            </article>
         </section>
     </main>
     <footer></footer>
