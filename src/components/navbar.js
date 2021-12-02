@@ -7,10 +7,10 @@ function navbarHome() {
             <h3>ShortStack Messaging</h3>
         </div>
         <div class="nav-item">
-            <button id="signIn-button" class="button" onclick="location.href='signIn.html'">Sign In</button>
+            <button id="signIn-button" class="nav-button" onclick="location.href='signIn.html'">Sign In</button>
         </div>
         <div class="nav-item">
-            <button id="signUp-button" class="button" onclick="location.href='signUp.html'">Sign Up</button>
+            <button id="signUp-button" class="nav-button" onclick="location.href='signUp.html'">Sign Up</button>
         </div>
     `
     navbarContainer.appendChild(template.content)
