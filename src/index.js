@@ -3,7 +3,7 @@ import { async } from "@firebase/util"
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
-import { getFirestore, collection, addDoc, doc, onSnapshot, getDocsFromServer, query, where } from "firebase/firestore"
+import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp } from "firebase/firestore"
 
 // Firebase config
 const firebaseConfig = {
@@ -43,16 +43,30 @@ function signOutOfApp(page) {
 
 async function fetchMessages(q) {
     let messages = []
-    getDocsFromServer(q).then((snapshot) => {
-        snapshot.docs.forEach((doc) => {
-            messages.push({ ...doc.data(), id: doc.id })
+    getDocsFromServer(q)
+        .then((snapshot) => {
+            snapshot.docs.forEach((doc) => {
+                messages.push({ ...doc.data(), id: doc.id })
+            })
         })
-    })
+        .catch(err => {
+            alert(err.message)
+        })
     return messages
 }
 
-async function pushMessages(message) {
-
+async function pushMessage(message, reciever) {
+    serverTimestamp(
+        addDoc(messagesCollectionReference, {
+            "sender": currentUser.email,
+            "reciever": reciever,
+            "message": message,
+            }
+        )
+        .catch(err => {
+            alert(err.message)
+        })
+    )
 }
 
 /*
@@ -207,8 +221,14 @@ if (currentLocation.includes("app/index.html")) {
         const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email))
         const recievedMessagesQuery = query(messagesCollectionReference, where("reciever", "==", currentUser.email))
 
-        let sentMessages = fetchData(sentMessagesQuery)
-        let recievedMessages = fetchData(recievedMessagesQuery)
+        pushMessage(inputform.message.value, inputform.sendto.value)
+        inputform.reset()
+
+        let sentMessages = fetchMessages(sentMessagesQuery)
+        let recievedMessages = fetchMessages(recievedMessagesQuery)
+
+        console.log(sentMessages)
+        console.log(recievedMessages)
     })
 }
 
