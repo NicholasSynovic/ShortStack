@@ -54,8 +54,12 @@ body    {
     margin-right: auto;
 }
 
-#textbox    {
-    width: 90%;
+#sendto    {
+    width: 40%;
+}
+
+#message    {
+    width: 40%;
 }
 
 #textsubmit {

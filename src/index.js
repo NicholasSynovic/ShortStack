@@ -1,9 +1,9 @@
 // Imports
 import { async } from "@firebase/util"
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, getCurrentUser} from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
-import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, getDocsFromServer, query, where } from "firebase/firestore"
+import { getFirestore, collection, addDoc, doc, onSnapshot, getDocsFromServer, query, where } from "firebase/firestore"
 
 // Firebase config
 const firebaseConfig = {
@@ -49,6 +49,10 @@ async function fetchMessages(q) {
         })
     })
     return messages
+}
+
+async function pushMessages(message) {
+
 }
 
 /*
