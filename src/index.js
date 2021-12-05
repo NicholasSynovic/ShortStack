@@ -1,8 +1,9 @@
 // Imports
+import { async } from "@firebase/util"
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile, getCurrentUser} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
-// import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore"
+import { getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, getDocsFromServer, query, where } from "firebase/firestore"
 
 // Firebase config
 const firebaseConfig = {
@@ -15,9 +16,16 @@ const firebaseConfig = {
     measurementId: "G-YSCM3NLK9Q"
 }
 
+// Initilize application components
+let currentLocation = window.location.href
+let currentUser = null
+
 // Initialize Firebase Components
 const app = initializeApp(firebaseConfig);
 const authentication = getAuth()
+const firestore = getFirestore()
+const messagesCollectionReference = collection(firestore, "messages")
+
 // const analytics = getAnalytics(app);
 
 // Firebase Authentication
@@ -168,40 +176,59 @@ if (document.body.contains(document.getElementById("logout-button"))) {
 Custom Hello {User} Text
 ------------------------
 */
-
-let currentLocation = window.location.href
 if (currentLocation.includes("app/index.html")) {
     const displayNameGreeting = document.getElementById("displayName-greeting")
     const profileIcon = document.getElementById("profile-icon")
     onAuthStateChanged(authentication, (user) => {
-        displayNameGreeting.innerText = user.displayName
-        profileIcon.src = user.photoURL
+        currentUser = user
+        displayNameGreeting.innerText = currentUser.displayName
+        profileIcon.src = currentUser.photoURL
     })
 }
 
-// const firestore = getFirestore()
-// const collectionReference = collection(firestore, "books")
+if (currentLocation.includes("app/index.html")) {
+    inputform.addEventListener("submit", (e) => {
+        e.preventDefault()
 
-// Print out all objects in the collection REQUIRES REFRESH TO VIEW NEW DATA
-// getDocs(collectionReference).then((snapshot) => {
-//     let books = []
-//     snapshot.docs.forEach((doc) => {
-//         books.push({...doc.data(), id: doc.id})
-//     })
-//     console.log(books)
-// })
-//     .catch(err => {
-//         console.log(err.message)
-// })
+        const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email))
+        const recievedMessagesQuery = query(messagesCollectionReference, where("reciever", "==", currentUser.email))
 
-// // Print out all objects in the collection IN REAL TIME
-// onSnapshot(collectionReference, (snapshot) => {
+        async function fetchData(q) {
+            let messages = []
+            getDocsFromServer(q).then((snapshot) => {
+                snapshot.docs.forEach((doc) => {
+                    messages.push({ ...doc.data(), id: doc.id })
+                })
+            })
+            return messages
+        }
+
+        let sentMessages = fetchData(sentMessagesQuery)
+        let recievedMessages = fetchData(recievedMessagesQuery)
+    })
+}
+
+/*
+Get All Documents That Were Sent by the Current User
+----------------------------------------------------
+*/
+// if (currentLocation.includes("app/index.html")) {
+
+// }
+
+
+
+// Sending and recieving messages
+
+// Print out all objects in the collection IN REAL TIME
+// onSnapshot(messagesCollectionReference, (snapshot) => {
 //     let books = []
 //     snapshot.docs.forEach((doc) => {
 //         books.push({ ...doc.data(), id: doc.id })
 //     })
 //     console.log(books)
 // })
+
 
 // // Add book to FireStore Books collection
 // const addBookForm = document.getElementById("addData")
