@@ -20,3 +20,28 @@ body    {
     border-color: blue;
     border-style: solid;
 }
+
+#sidebar    {
+    height: 77vh;
+    border-radius: 1vw;
+    border-color: black;
+    border-style: solid;
+}
+
+#chat   {
+    height: 100%;
+    width: 100%;
+    border-radius: 1vw;
+    border-color: black;
+    border-style: solid;
+}
+
+#messages   {
+    height: 90%;
+    width: 90%;
+    border-radius: 1vw;
+    border-color: black;
+    border-style: solid;
+    margin-left: auto;
+    margin-right: auto;
+}
