@@ -41,6 +41,16 @@ function signOutOfApp(page) {
         })
 }
 
+async function fetchMessages(q) {
+    let messages = []
+    getDocsFromServer(q).then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+            messages.push({ ...doc.data(), id: doc.id })
+        })
+    })
+    return messages
+}
+
 /*
 Sign Up Button
 --------------
@@ -192,16 +202,6 @@ if (currentLocation.includes("app/index.html")) {
 
         const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email))
         const recievedMessagesQuery = query(messagesCollectionReference, where("reciever", "==", currentUser.email))
-
-        async function fetchData(q) {
-            let messages = []
-            getDocsFromServer(q).then((snapshot) => {
-                snapshot.docs.forEach((doc) => {
-                    messages.push({ ...doc.data(), id: doc.id })
-                })
-            })
-            return messages
-        }
 
         let sentMessages = fetchData(sentMessagesQuery)
         let recievedMessages = fetchData(recievedMessagesQuery)
