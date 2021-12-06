@@ -216,14 +216,19 @@ if (currentLocation.includes("app/index.html")) {
         displayNameGreeting.innerText = currentUser.displayName
         profileIcon.src = currentUser.photoURL
 
-        // Define firebase queries
-        const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email))
-        const recievedMessagesQuery = query(messagesCollectionReference, where("reciever", "==", currentUser.email))
-
         // Get messages after form is submitted
-
         inputform.addEventListener("submit", (e) => {
             e.preventDefault()
+
+            // Define firebase queries
+            const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email), where("reciever", "==", inputform.sendto.value))
+            const recievedMessagesQuery = query(messagesCollectionReference, where("sender", "==", inputform.sendto.value), where("reciever", "==", currentUser.email))
+
+            // Send a message
+            pushMessage(inputform.message.value, inputform.sendto.value)
+
+            // Clear previous messages
+            messageTable.innerHTML = ""
 
             // Get sent messages
             getDocsFromServer(sentMessagesQuery)
@@ -237,6 +242,7 @@ if (currentLocation.includes("app/index.html")) {
                     </div>
                     `
                         messageTable.appendChild(template.content)
+                        console.log(foo)
                     })
                 })
                 .catch(err => {
@@ -260,6 +266,8 @@ if (currentLocation.includes("app/index.html")) {
                 .catch(err => {
                     alert(err.message)
                 })
+
+            inputform.reset()
         })
     })
 }
