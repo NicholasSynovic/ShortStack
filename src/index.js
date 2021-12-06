@@ -201,80 +201,65 @@ if (document.body.contains(document.getElementById("logout-button"))) {
 // Application Logic
 
 /*
-Custom Hello {User} Text
-------------------------
+Code to run once page is open
+-----------------------------
 */
 if (currentLocation.includes("app/index.html")) {
+    // Define page elements
     const displayNameGreeting = document.getElementById("displayName-greeting")
     const profileIcon = document.getElementById("profile-icon")
+    const messageTable = document.getElementById("messages")
+
+    // Set the current logged in user
     onAuthStateChanged(authentication, (user) => {
         currentUser = user
         displayNameGreeting.innerText = currentUser.displayName
         profileIcon.src = currentUser.photoURL
-    })
-}
 
-if (currentLocation.includes("app/index.html")) {
-    inputform.addEventListener("submit", (e) => {
-        e.preventDefault()
-
+        // Define firebase queries
         const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email))
         const recievedMessagesQuery = query(messagesCollectionReference, where("reciever", "==", currentUser.email))
 
-        pushMessage(inputform.message.value, inputform.sendto.value)
-        inputform.reset()
+        // Get messages after form is submitted
 
-        let sentMessages = fetchMessages(sentMessagesQuery)
-        let recievedMessages = fetchMessages(recievedMessagesQuery)
+        inputform.addEventListener("submit", (e) => {
+            e.preventDefault()
 
-        console.log(sentMessages)
-        console.log(recievedMessages)
+            // Get sent messages
+            getDocsFromServer(sentMessagesQuery)
+                .then((snapshot) => {
+                    snapshot.docs.forEach((doc) => {
+                        let foo = doc.data().message
+                        const template = document.createElement("template")
+                        template.innerHTML = `
+                    <div id="sentMessage">
+                        <p>${foo}</p>
+                    </div>
+                    `
+                        messageTable.appendChild(template.content)
+                    })
+                })
+                .catch(err => {
+                    alert(err.message)
+                })
+
+            // Get recieved messages
+            getDocsFromServer(recievedMessagesQuery)
+                .then((snapshot) => {
+                    snapshot.docs.forEach((doc) => {
+                        let foo = doc.data().message
+                        const template = document.createElement("template")
+                        template.innerHTML = `
+                    <div id="recievedMessage">
+                        <p>${foo}</p>
+                    </div>
+                    `
+                        messageTable.appendChild(template.content)
+                    })
+                })
+                .catch(err => {
+                    alert(err.message)
+                })
+        })
     })
 }
-
-/*
-Get All Documents That Were Sent by the Current User
-----------------------------------------------------
-*/
-// if (currentLocation.includes("app/index.html")) {
-
-// }
-
-
-
-// Sending and recieving messages
-
-// Print out all objects in the collection IN REAL TIME
-// onSnapshot(messagesCollectionReference, (snapshot) => {
-//     let books = []
-//     snapshot.docs.forEach((doc) => {
-//         books.push({ ...doc.data(), id: doc.id })
-//     })
-//     console.log(books)
-// })
-
-
-// // Add book to FireStore Books collection
-// const addBookForm = document.getElementById("addData")
-// addBookForm.addEventListener("submit", (e) => {
-//     e.preventDefault()
-
-//     addDoc(collectionReference, {
-//         title: addBookForm.title.value,
-//         author: addBookForm.author.value,
-//     }).then(() => {
-//         addBookForm.reset()
-//     })
-// })
-
-// // Delete book from FireStore Books collection
-// const deleteBookForm = document.getElementById("deleteData")
-// deleteBookForm.addEventListener("submit", (e) => {
-//     e.preventDefault()
-
-//     const documentReference = doc(firestore, "books", deleteBookForm.id.value)
-
-//     deleteDoc(documentReference).then(() => {
-//         deleteBookForm.reset()
-//     })
-// })

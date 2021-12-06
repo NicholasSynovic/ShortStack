@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require("copy-webpack-plugin");
-const path = require("path")
+const path = require("path");
+const { experiments } = require('webpack');
 
 module.exports = {
     mode: "development",
@@ -41,5 +42,8 @@ module.exports = {
             ],
         })
     ],
+    experiments: {
+        topLevelAwait: true,
+    },
     watch: true
 }
