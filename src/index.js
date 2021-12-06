@@ -242,7 +242,6 @@ if (currentLocation.includes("app/index.html")) {
                     </div>
                     `
                         messageTable.appendChild(template.content)
-                        console.log(foo)
                     })
                 })
                 .catch(err => {
