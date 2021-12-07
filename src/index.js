@@ -37,11 +37,12 @@ function signOutOfApp(page) {
         })
 }
 
-async function pushMessage(message, reciever) {
+async function pushMessage(message, reciever, profilePicURL) {
         addDoc(messagesCollectionReference, {
             "sender": currentUser.email,
             "reciever": reciever,
             "message": message,
+            "profilePicURL": profilePicURL,
             "timestamp": serverTimestamp()
             }
         )
@@ -56,6 +57,7 @@ function fetchMessages(snapshot, messageTable) {
             try {
                 let message = doc.data().message
                 let sender = doc.data().sender
+                let profilePicURL = doc.data().profilePicURL
 
                 // Timestamp information
                 let messageTimestamp = doc.data().timestamp
@@ -68,10 +70,9 @@ function fetchMessages(snapshot, messageTable) {
                 const template = document.createElement("template")
                 template.innerHTML = `
                                     <div id=${sender == currentUser.email ? "sentMessage" : "recievedMessage"}>
+                                        <img id="profile-icon" alt="" src=${sender == currentUser.email ? currentUser.photoURL : profilePicURL}>
                                         <p id=${sender == currentUser.email ? "sentText" : "recievedText"}>${message}</p>
-
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${sender}</p>
-
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${date + " " + time}</p>
                                     </div>
                                 `
@@ -150,7 +151,7 @@ if (document.body.contains(document.getElementById("signUp-form")))  {
             .then(() => {
                 updateProfile(authentication.currentUser, {
                     displayName: displayName,
-                    photoURL: `https://avatars.dicebear.com/api/bottts/${Math.floor(Math.random * 42069)}.svg`
+                    photoURL: "https://avatars.dicebear.com/api/bottts/" + Math.floor(Math.random() * 100).toString() + ".svg"
                 })
                     .then(() => {
                         signUpForm.reset()
@@ -240,7 +241,7 @@ if (currentLocation.includes("app/index.html")) {
     // Get messages after form is submitted
     inputform.addEventListener("submit", (e) => {
         e.preventDefault()
-        pushMessage(inputform.message.value, inputform.sendto.value)
+        pushMessage(inputform.message.value, inputform.sendto.value, currentUser.photoURL)
         inputform.message.value = ""
     })
 }
