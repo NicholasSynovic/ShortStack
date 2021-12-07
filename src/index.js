@@ -1,8 +1,7 @@
 // Imports
 import { initializeApp } from "firebase/app"
-import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
-// import { getAnalytics } from "firebase/analytics"
-import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp, orderBy, Timestamp, onSnapshot, limit} from "firebase/firestore"
+import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth"
+import { getFirestore, collection, addDoc, getDocsFromServer, query, serverTimestamp, orderBy, Timestamp, onSnapshot, limit } from "firebase/firestore"
 
 // Firebase config
 const firebaseConfig = {
@@ -24,8 +23,6 @@ const app = initializeApp(firebaseConfig);
 const authentication = getAuth()
 const firestore = getFirestore()
 const messagesCollectionReference = collection(firestore, "messages")
-
-// const analytics = getAnalytics(app);
 
 // Firebase Authentication
 
@@ -51,6 +48,40 @@ async function pushMessage(message, reciever) {
         .catch(err => {
             alert(err.message)
         })
+}
+
+function fetchMessages(snapshot, messageTable) {
+    snapshot.docs.forEach((doc) => {
+        if ((doc.data().sender == currentUser.email & doc.data().reciever == inputform.sendto.value) | (doc.data().sender == inputform.sendto.value & doc.data().reciever == currentUser.email)) {
+            try {
+                let message = doc.data().message
+                let sender = doc.data().sender
+
+                // Timestamp information
+                let messageTimestamp = doc.data().timestamp
+                let seconds = messageTimestamp["seconds"]
+                let nanoseconds = messageTimestamp["nanoseconds"]
+                let timestamp = new Timestamp(seconds, nanoseconds).toDate()
+                let date = timestamp.toLocaleDateString()
+                let time = timestamp.getHours() + ":" + timestamp.getMinutes()
+
+                const template = document.createElement("template")
+                template.innerHTML = `
+                                    <div id=${sender == currentUser.email ? "sentMessage" : "recievedMessage"}>
+                                        <p id=${sender == currentUser.email ? "sentText" : "recievedText"}>${message}</p>
+
+                                        <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${sender}</p>
+
+                                        <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${date + " " + time}</p>
+                                    </div>
+                                `
+                messageTable.insertBefore(template.content, messageTable.firstChild)
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    })
 }
 
 /*
@@ -203,37 +234,7 @@ if (currentLocation.includes("app/index.html")) {
 
     onSnapshot(query(messagesCollectionReference, orderBy("timestamp", "desc"), limit(50)), (snapshot) => {
         messageTable.innerHTML = ""
-        snapshot.docs.forEach((doc) => {
-            if ((doc.data().sender == currentUser.email & doc.data().reciever == inputform.sendto.value) | (doc.data().sender == inputform.sendto.value & doc.data().reciever == currentUser.email)) {
-                try {
-                    let message = doc.data().message
-                    let sender = doc.data().sender
-
-                    // Timestamp information
-                    let messageTimestamp = doc.data().timestamp
-                    let seconds = messageTimestamp["seconds"]
-                    let nanoseconds = messageTimestamp["nanoseconds"]
-                    let timestamp = new Timestamp(seconds, nanoseconds).toDate()
-                    let date = timestamp.toLocaleDateString()
-                    let time = timestamp.getHours() + ":" + timestamp.getMinutes()
-
-                    const template = document.createElement("template")
-                    template.innerHTML = `
-                                    <div id=${sender == currentUser.email ? "sentMessage" : "recievedMessage"}>
-                                        <p id=${sender == currentUser.email ? "sentText" : "recievedText"}>${message}</p>
-
-                                        <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${sender}</p>
-
-                                        <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${date + " " + time}</p>
-                                    </div>
-                                `
-                    messageTable.insertBefore(template.content, messageTable.firstChild)
-
-                } catch (error) {
-                    console.log(error)
-                }
-            }
-        })
+        fetchMessages(snapshot, messageTable)
     })
 
     // Get messages after form is submitted
@@ -242,76 +243,4 @@ if (currentLocation.includes("app/index.html")) {
         pushMessage(inputform.message.value, inputform.sendto.value)
         inputform.message.value = ""
     })
-    // })
 }
-
-// Send a message
-
-            // Clear previous messages
-
-            // // Get sent messages
-            // getDocsFromServer(sentMessagesQuery)
-            //     .then((snapshot) => {
-            //         snapshot.docs.forEach((doc) => {
-            //             try {
-            //                 let message = doc.data().message
-            //                 let sender = doc.data().sender
-            //                 let messageTimestamp = doc.data().timestamp
-
-            //                 let seconds = messageTimestamp["seconds"]
-            //                 let nanoseconds = messageTimestamp["nanoseconds"]
-            //                 let timestamp = new Timestamp(seconds, nanoseconds).toDate()
-            //                 let date = timestamp.toLocaleDateString()
-            //                 let time = timestamp.getHours() + ":" + timestamp.getMinutes()
-
-            //                 const template = document.createElement("template")
-            //                 template.innerHTML = `
-            //                     <div id="sentMessage">
-            //                         <p id="sentText">${message}</p>
-            //                         <p id="sentMetadata">${sender}</p>
-            //                         <p id="sentMetadata">${date + " " + time}</p>
-            //                     </div>
-            //                 `
-            //                 messageTable.insertBefore(template.content, messageTable.firstChild)
-
-            //             } catch (error) {
-            //                 console.log(error)
-            //             }
-            //         })
-            //     })
-            //     .catch(err => {
-            //         alert(err.message)
-            //     })
-
-            // // Get recieved messages
-            // getDocsFromServer(recievedMessagesQuery)
-            //     .then((snapshot) => {
-            //         snapshot.docs.forEach((doc) => {
-            //             try {
-            //                 let message = doc.data().message
-            //                 let sender = doc.data().sender
-            //                 let messageTimestamp = doc.data().timestamp
-
-            //                 let seconds = messageTimestamp["seconds"]
-            //                 let nanoseconds = messageTimestamp["nanoseconds"]
-            //                 let timestamp = new Timestamp(seconds, nanoseconds).toDate()
-            //                 let date = timestamp.toLocaleDateString()
-            //                 let time = timestamp.getHours() + ":" + timestamp.getMinutes()
-
-            //                 const template = document.createElement("template")
-            //                 template.innerHTML = `
-            //                     <div id="recievedMessage">
-            //                         <p id="recievedText">${message}</p>
-            //                         <p id="recievedMetadata">${sender}</p>
-            //                         <p id="recievedMetadata">${date + " " + time}</p>
-            //                     </div>
-            //                 `
-            //                 messageTable.insertBefore(template.content, messageTable.firstChild)
-            //             } catch (error) {
-            //                 console.log(error)
-            //             }
-            //         })
-            //     })
-            //     .catch(err => {
-            //         console.log(err.message)
-            //     })
