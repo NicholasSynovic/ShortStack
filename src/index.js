@@ -3,7 +3,7 @@ import { async } from "@firebase/util"
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
-import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp, orderBy} from "firebase/firestore"
+import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp, orderBy, Timestamp} from "firebase/firestore"
 
 // Firebase config
 const firebaseConfig = {
@@ -233,14 +233,30 @@ if (currentLocation.includes("app/index.html")) {
             getDocsFromServer(sentMessagesQuery)
                 .then((snapshot) => {
                     snapshot.docs.forEach((doc) => {
-                        let foo = doc.data().message
-                        const template = document.createElement("template")
-                        template.innerHTML = `
-                    <div id="sentMessage">
-                        <p>${foo}</p>
-                    </div>
-                    `
-                        messageTable.appendChild(template.content)
+                        try {
+                            let message = doc.data().message
+                            let sender = doc.data().sender
+                            let messageTimestamp = doc.data().timestamp
+
+                            let seconds = messageTimestamp["seconds"]
+                            let nanoseconds = messageTimestamp["nanoseconds"]
+                            let timestamp = new Timestamp(seconds, nanoseconds).toDate()
+                            let date = timestamp.toLocaleDateString()
+                            let time = timestamp.getHours() + ":" + timestamp.getMinutes()
+
+                            const template = document.createElement("template")
+                            template.innerHTML = `
+                                <div id="sentMessage">
+                                    <p id="sentText">${message}</p>
+                                    <p id="sentMetadata">${sender}</p>
+                                    <p id="sentMetadata">${date + " " + time}</p>
+                                </div>
+                            `
+                            messageTable.insertBefore(template.content, messageTable.firstChild)
+
+                        } catch (error) {
+                            console.log(error)
+                        }
                     })
                 })
                 .catch(err => {
@@ -251,18 +267,33 @@ if (currentLocation.includes("app/index.html")) {
             getDocsFromServer(recievedMessagesQuery)
                 .then((snapshot) => {
                     snapshot.docs.forEach((doc) => {
-                        let foo = doc.data().message
-                        const template = document.createElement("template")
-                        template.innerHTML = `
-                    <div id="recievedMessage">
-                        <p>${foo}</p>
-                    </div>
-                    `
-                        messageTable.appendChild(template.content)
+                        try {
+                            let message = doc.data().message
+                            let sender = doc.data().sender
+                            let messageTimestamp = doc.data().timestamp
+
+                            let seconds = messageTimestamp["seconds"]
+                            let nanoseconds = messageTimestamp["nanoseconds"]
+                            let timestamp = new Timestamp(seconds, nanoseconds).toDate()
+                            let date = timestamp.toLocaleDateString()
+                            let time = timestamp.getHours() + ":" + timestamp.getMinutes()
+
+                            const template = document.createElement("template")
+                            template.innerHTML = `
+                                <div id="recievedMessage">
+                                    <p id="recievedText">${message}</p>
+                                    <p id="recievedMetadata">${sender}</p>
+                                    <p id="recievedMetadata">${date + " " + time}</p>
+                                </div>
+                            `
+                            messageTable.insertBefore(template.content, messageTable.firstChild)
+                        } catch (error) {
+                            console.log(error)
+                        }
                     })
                 })
                 .catch(err => {
-                    alert(err.message)
+                    console.log(err.message)
                 })
 
             inputform.message.value = ""
