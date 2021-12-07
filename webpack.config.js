@@ -45,5 +45,4 @@ module.exports = {
     experiments: {
         topLevelAwait: true,
     },
-    watch: true
 }
