@@ -41,7 +41,7 @@ body    {
 #sentMessage    {
     width: 100%;
     height: fit-content;
-    text-align: right;
+    text-align: left;
     border: 1px solid red;
     overflow-y: auto;
     margin-top: 1vh;
