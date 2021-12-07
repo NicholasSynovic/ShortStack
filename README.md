@@ -16,6 +16,8 @@
 - [Dicebear Avatars API](https://avatars.dicebear.com/)
 - [Spectral Font](https://fonts.google.com/specimen/Spectral#standard-styles) by *Production Type*
 - [Karla Font](https://fonts.google.com/specimen/Karla) by *Jonny Pinhorn*
+- [Marked](https://marked.js.org/)
+- [DOMPurify](https://cure53.de/purify)
 
 ### Resources
 
