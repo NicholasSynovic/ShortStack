@@ -3,7 +3,7 @@ import { async } from "@firebase/util"
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
-import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp } from "firebase/firestore"
+import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp, orderBy} from "firebase/firestore"
 
 // Firebase config
 const firebaseConfig = {
@@ -56,17 +56,16 @@ async function fetchMessages(q) {
 }
 
 async function pushMessage(message, reciever) {
-    serverTimestamp(
         addDoc(messagesCollectionReference, {
             "sender": currentUser.email,
             "reciever": reciever,
             "message": message,
+            "timestamp": serverTimestamp()
             }
         )
         .catch(err => {
             alert(err.message)
         })
-    )
 }
 
 /*
@@ -221,8 +220,8 @@ if (currentLocation.includes("app/index.html")) {
             e.preventDefault()
 
             // Define firebase queries
-            const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email), where("reciever", "==", inputform.sendto.value))
-            const recievedMessagesQuery = query(messagesCollectionReference, where("sender", "==", inputform.sendto.value), where("reciever", "==", currentUser.email))
+            const sentMessagesQuery = query(messagesCollectionReference, where("sender", "==", currentUser.email), where("reciever", "==", inputform.sendto.value), orderBy("timestamp", "desc"))
+            const recievedMessagesQuery = query(messagesCollectionReference, where("sender", "==", inputform.sendto.value), where("reciever", "==", currentUser.email), orderBy("timestamp", "desc"))
 
             // Send a message
             pushMessage(inputform.message.value, inputform.sendto.value)
