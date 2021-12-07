@@ -11,9 +11,6 @@ body    {
 
 #content    {
     height: 77vh;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    column-gap: 2vw;
     padding: 1vw;
     margin: 1vw;
     border-radius: 1vw;
