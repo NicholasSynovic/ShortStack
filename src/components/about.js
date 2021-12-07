@@ -8,7 +8,7 @@ function about() {
         </div>
         <div id="app-info">
             <h1>ShortStack Messaging</h1>
-            <p>Proof of concept chat PWA</p>
+            <p>Proof of concept chat app</p>
             <p>Application made by Nicholas Synovic</p>
             <p>Icons made by <a href="https://www.flaticon.com/authors/bukeicon"
                 title="bukeicon">bukeicon</a> from <a href="https://www.flaticon.com/"
