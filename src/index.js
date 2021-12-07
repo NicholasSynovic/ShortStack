@@ -199,46 +199,47 @@ if (currentLocation.includes("app/index.html")) {
         currentUser = user
         displayNameGreeting.innerText = currentUser.displayName
         profileIcon.src = currentUser.photoURL
+    })
 
-        onSnapshot(query(messagesCollectionReference, orderBy("timestamp", "desc")), (snapshot) => {
-            messageTable.innerHTML = ""
-            snapshot.docs.forEach((doc) => {
-                if ((doc.data().sender == currentUser.email & doc.data().reciever == inputform.sendto.value) | (doc.data().sender == inputform.sendto.value & doc.data().reciever == currentUser.email)) {
-                    try {
-                        let message = doc.data().message
-                        let sender = doc.data().sender
-                        let messageTimestamp = doc.data().timestamp
+    onSnapshot(query(messagesCollectionReference, orderBy("timestamp", "desc")), (snapshot) => {
+        messageTable.innerHTML = ""
+        snapshot.docs.forEach((doc) => {
+            if (doc.data().sender == currentUser.email) {
+                try {
+                    let message = doc.data().message
+                    let sender = doc.data().sender
+                    let messageTimestamp = doc.data().timestamp
 
-                        let seconds = messageTimestamp["seconds"]
-                        let nanoseconds = messageTimestamp["nanoseconds"]
-                        let timestamp = new Timestamp(seconds, nanoseconds).toDate()
-                        let date = timestamp.toLocaleDateString()
-                        let time = timestamp.getHours() + ":" + timestamp.getMinutes()
+                    let seconds = messageTimestamp["seconds"]
+                    let nanoseconds = messageTimestamp["nanoseconds"]
+                    let timestamp = new Timestamp(seconds, nanoseconds).toDate()
+                    let date = timestamp.toLocaleDateString()
+                    let time = timestamp.getHours() + ":" + timestamp.getMinutes()
 
-                        const template = document.createElement("template")
-                        template.innerHTML = `
+                    const template = document.createElement("template")
+                    template.innerHTML = `
                                     <div id="sentMessage">
                                         <p id="sentText">${message}</p>
                                         <p id="sentMetadata">${sender}</p>
                                         <p id="sentMetadata">${date + " " + time}</p>
                                     </div>
                                 `
-                        messageTable.insertBefore(template.content, messageTable.firstChild)
+                    messageTable.insertBefore(template.content, messageTable.firstChild)
 
-                    } catch (error) {
-                        console.log(error)
-                    }
+                } catch (error) {
+                    console.log(error)
                 }
-            })
-        })
-
-        // Get messages after form is submitted
-        inputform.addEventListener("submit", (e) => {
-            e.preventDefault()
-            pushMessage(inputform.message.value, inputform.sendto.value)
-            inputform.message.value = ""
+            }
         })
     })
+
+    // Get messages after form is submitted
+    inputform.addEventListener("submit", (e) => {
+        e.preventDefault()
+        pushMessage(inputform.message.value, inputform.sendto.value)
+        inputform.message.value = ""
+    })
+    // })
 }
 
 // Send a message
