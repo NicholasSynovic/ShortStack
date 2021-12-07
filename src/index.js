@@ -5,8 +5,6 @@ import { getFirestore, collection, addDoc, getDocsFromServer, query, serverTimes
 import { marked } from "marked"
 // import DOMPurify from "dompurify"
 
-// Marked Configuration
-
 // Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyAWLtpyFyzKHGliA5I57DzIEJDdPxna9M8",
