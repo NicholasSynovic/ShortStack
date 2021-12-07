@@ -53,7 +53,8 @@ async function pushMessage(message, reciever, profilePicURL) {
 
 function fetchMessages(snapshot, messageTable) {
     snapshot.docs.forEach((doc) => {
-        if ((doc.data().sender == currentUser.email & doc.data().reciever == inputform.sendto.value) | (doc.data().sender == inputform.sendto.value & doc.data().reciever == currentUser.email)) {
+        const sendTo = inputform.sendto.value.toLowerCase()
+        if ((doc.data().sender == currentUser.email & doc.data().reciever == sendTo) | (doc.data().sender == sendTo & doc.data().reciever == currentUser.email)) {
             try {
                 let message = doc.data().message
                 let sender = doc.data().sender
@@ -241,7 +242,7 @@ if (currentLocation.includes("app/index.html")) {
     // Get messages after form is submitted
     inputform.addEventListener("submit", (e) => {
         e.preventDefault()
-        pushMessage(inputform.message.value, inputform.sendto.value, currentUser.photoURL)
+        pushMessage(inputform.message.value, inputform.sendto.value.toLowerCase(), currentUser.photoURL)
         inputform.message.value = ""
     })
 }
