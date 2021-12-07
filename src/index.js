@@ -242,7 +242,11 @@ if (currentLocation.includes("app/index.html")) {
     // Get messages after form is submitted
     inputform.addEventListener("submit", (e) => {
         e.preventDefault()
-        pushMessage(inputform.message.value, inputform.sendto.value.toLowerCase(), currentUser.photoURL)
+
+        let message = inputform.message.value.replace(/\r?\n/g, '<br>')
+        let sendTo = inputform.sendto.value.toLowerCase()
+
+        pushMessage(message, sendTo, currentUser.photoURL)
         inputform.message.value = ""
     })
 }
