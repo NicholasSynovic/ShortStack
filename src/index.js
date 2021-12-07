@@ -98,6 +98,8 @@ function fetchMessages(snapshot, messageTable) {
                                     </div>
                                 `
                 messageTable.insertBefore(template.content, messageTable.firstChild)
+                var xH = messageTable.scrollHeight;
+                messageTable.scrollTo(0, xH);
 
             } catch (error) {
                 console.log(error)
