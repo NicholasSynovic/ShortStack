@@ -204,12 +204,13 @@ if (currentLocation.includes("app/index.html")) {
     onSnapshot(query(messagesCollectionReference, orderBy("timestamp", "desc")), (snapshot) => {
         messageTable.innerHTML = ""
         snapshot.docs.forEach((doc) => {
-            if (doc.data().sender == currentUser.email) {
+            if ((doc.data().sender == currentUser.email & doc.data().reciever == inputform.sendto.value) | (doc.data().sender == inputform.sendto.value & doc.data().reciever == currentUser.email)) {
                 try {
                     let message = doc.data().message
                     let sender = doc.data().sender
-                    let messageTimestamp = doc.data().timestamp
 
+                    // Timestamp information
+                    let messageTimestamp = doc.data().timestamp
                     let seconds = messageTimestamp["seconds"]
                     let nanoseconds = messageTimestamp["nanoseconds"]
                     let timestamp = new Timestamp(seconds, nanoseconds).toDate()
@@ -218,10 +219,12 @@ if (currentLocation.includes("app/index.html")) {
 
                     const template = document.createElement("template")
                     template.innerHTML = `
-                                    <div id="sentMessage">
-                                        <p id="sentText">${message}</p>
-                                        <p id="sentMetadata">${sender}</p>
-                                        <p id="sentMetadata">${date + " " + time}</p>
+                                    <div id=${sender == currentUser.email ? "sentMessage" : "recievedMessage"}>
+                                        <p id=${sender == currentUser.email ? "sentText" : "recievedText"}>${message}</p>
+
+                                        <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${sender}</p>
+
+                                        <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${date + " " + time}</p>
                                     </div>
                                 `
                     messageTable.insertBefore(template.content, messageTable.firstChild)
