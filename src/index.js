@@ -266,7 +266,7 @@ if (currentLocation.includes("app/index.html")) {
                     alert(err.message)
                 })
 
-            inputform.reset()
+            inputform.message.value = ""
         })
     })
 }
