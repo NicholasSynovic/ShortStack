@@ -3,9 +3,7 @@ import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth"
 import { getFirestore, collection, addDoc, getDocsFromServer, query, serverTimestamp, orderBy, Timestamp, onSnapshot, limit } from "firebase/firestore"
 import { marked } from "marked"
-import DOMPurify from "dompurify"
-
-// Marked Configuration
+// import DOMPurify from "dompurify"
 
 // Firebase config
 const firebaseConfig = {
@@ -76,7 +74,7 @@ function fetchMessages(snapshot, messageTable) {
                 template.innerHTML = `
                                     <div id=${sender == currentUser.email ? "sentMessage" : "recievedMessage"}>
                                         <img id="profile-icon" alt="" src=${sender == currentUser.email ? currentUser.photoURL : profilePicURL}>
-                                        <div id=${sender == currentUser.email ? "sentText" : "recievedText"}>${DOMPurify.sanitize(marked.parse(message))}</div>
+                                        <div id=${sender == currentUser.email ? "sentText" : "recievedText"}>${marked.parse(message)}</div>
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${sender}</p>
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${date + " " + time}</p>
                                     </div>
