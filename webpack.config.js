@@ -39,7 +39,6 @@ module.exports = {
                 { from: "./src/img", to: "img" },
                 { from: "./src/css", to: "css" },
                 { from: "./src/components", to: "components" },
-                { from: "./src/js", to: "js" }
             ],
         })
     ],
