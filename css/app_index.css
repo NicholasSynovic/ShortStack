@@ -18,13 +18,6 @@ body    {
     border-style: solid;
 }
 
-#sidebar    {
-    height: 77vh;
-    border-radius: 1vw;
-    border-color: black;
-    border-style: solid;
-}
-
 #chat   {
     height: 77vh;
     width: 100%;
@@ -36,11 +29,10 @@ body    {
 #messages   {
     height: 90%;
     width: 90%;
-    border-radius: 1vw;
-    border-color: black;
-    border-style: solid;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
     overflow-y: auto;
     padding-right: 1vw;
     padding-left: 1vw;
