@@ -105,15 +105,31 @@ body    {
 }
 
 #sendto    {
-    width: 90%;
+    margin-top: 1vh;
+    width: 20vw;
+    height: 2vh;
+    max-height: 2vh;
+    min-height: 2vh;
+    max-width: 20vw;
+    min-width: 20vw;
 }
 
 #message    {
-    width: 90%;
-    height: 1vw;
+    margin-top: 1vh;
+    width: 20vw;
+    height: 2vh;
     max-height: 5vh;
+    min-height: 2vh;
+    max-width: 20vw;
+    min-width: 20vw;
 }
 
 #textsubmit {
-    width: 90%;
+    margin-top: 1vh;
+    width: 20vw;
+    height: 2vh;
+    max-height: 2vh;
+    min-height: 2vh;
+    max-width: 20vw;
+    min-width: 20vw;
 }
