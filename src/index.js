@@ -72,7 +72,7 @@ function fetchMessages(snapshot, messageTable) {
                 template.innerHTML = `
                                     <div id=${sender == currentUser.email ? "sentMessage" : "recievedMessage"}>
                                         <img id="profile-icon" alt="" src=${sender == currentUser.email ? currentUser.photoURL : profilePicURL}>
-                                        <p id=${sender == currentUser.email ? "sentText" : "recievedText"}>${message}</p>
+                                        <div id=${sender == currentUser.email ? "sentText" : "recievedText"}>${marked.parse(message)}</div>
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${sender}</p>
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${date + " " + time}</p>
                                     </div>
@@ -243,7 +243,8 @@ if (currentLocation.includes("app/index.html")) {
     inputform.addEventListener("submit", (e) => {
         e.preventDefault()
 
-        let message = inputform.message.value.replace(/\r?\n/g, '<br>')
+        // let message = inputform.message.value.replace(/\r?\n/g, '<br>')
+        let message = inputform.message.value
         let sendTo = inputform.sendto.value.toLowerCase()
 
         pushMessage(message, sendTo, currentUser.photoURL)
