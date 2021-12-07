@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile} from "firebase/auth"
 // import { getAnalytics } from "firebase/analytics"
-import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp, orderBy, Timestamp, onSnapshot} from "firebase/firestore"
+import { getFirestore, collection, addDoc, getDocsFromServer, query, where, serverTimestamp, orderBy, Timestamp, onSnapshot, limit} from "firebase/firestore"
 
 // Firebase config
 const firebaseConfig = {
@@ -201,7 +201,7 @@ if (currentLocation.includes("app/index.html")) {
         profileIcon.src = currentUser.photoURL
     })
 
-    onSnapshot(query(messagesCollectionReference, orderBy("timestamp", "desc")), (snapshot) => {
+    onSnapshot(query(messagesCollectionReference, orderBy("timestamp", "desc"), limit(50)), (snapshot) => {
         messageTable.innerHTML = ""
         snapshot.docs.forEach((doc) => {
             if ((doc.data().sender == currentUser.email & doc.data().reciever == inputform.sendto.value) | (doc.data().sender == inputform.sendto.value & doc.data().reciever == currentUser.email)) {
