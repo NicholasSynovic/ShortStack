@@ -6,21 +6,6 @@ import { marked } from "marked"
 import DOMPurify from "dompurify"
 
 // Marked Configuration
-marked.setOptions({
-    renderer: new marked.Renderer(),
-    highlight: function (code, lang) {
-        const hljs = require('highlight.js');
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        return hljs.highlight(code, { language }).value;
-    },
-    pedantic: false,
-    gfm: true,
-    breaks: false,
-    smartLists: true,
-    smartypants: false,
-    xhtml: false
-});
-
 
 // Firebase config
 const firebaseConfig = {
