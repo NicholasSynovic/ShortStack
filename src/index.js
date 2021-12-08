@@ -42,6 +42,7 @@ function signOutOfApp(page) {
 async function pushMessage(message, reciever, profilePicURL) {
         addDoc(messagesCollectionReference, {
             "sender": currentUser.email,
+            "senderDisplayName": currentUser.displayName,
             "reciever": reciever,
             "message": message,
             "profilePicURL": profilePicURL,
@@ -60,6 +61,7 @@ function fetchMessages(snapshot, messageTable) {
             try {
                 let message = doc.data().message
                 let sender = doc.data().sender
+                let senderDisplayName = doc.data().senderDisplayName
                 let profilePicURL = doc.data().profilePicURL
 
                 // Timestamp information
@@ -75,6 +77,7 @@ function fetchMessages(snapshot, messageTable) {
                                     <div id=${sender == currentUser.email ? "sentMessage" : "recievedMessage"}>
                                         <img id="profile-icon" alt="" src=${sender == currentUser.email ? currentUser.photoURL : profilePicURL}>
                                         <div id=${sender == currentUser.email ? "sentText" : "recievedText"}>${marked.parse(message)}</div>
+                                        <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${senderDisplayName}</p>
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${sender}</p>
                                         <p id=${sender == currentUser.email ? "sentMetadata" : "recievedMetadata"}>${date + " " + time}</p>
                                     </div>
