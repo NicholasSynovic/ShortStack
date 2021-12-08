@@ -59,7 +59,7 @@ body    {
 }
 
 #sentText    {
-    padding-right: 2vw;
+    padding-left: 2vw;
     margin-bottom: 0;
     word-wrap: break-word;
 }
