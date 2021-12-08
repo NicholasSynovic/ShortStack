@@ -6,6 +6,7 @@
 
 - [ShortStack](#shortstack)
   - [Table of Contents](#table-of-contents)
+  - [Note](#note)
   - [Project Source Code and Published Link](#project-source-code-and-published-link)
     - [GitHub Repository Link](#github-repository-link)
     - [GitHub Pages Link](#github-pages-link)
@@ -44,6 +45,10 @@
     - [Constraints](#constraints)
     - [Features That I Failed To Complete](#features-that-i-failed-to-complete)
   - [Conclusion](#conclusion)
+
+## Note
+
+This document only includes information relevant to the final report submission. For a condensed version of the document, please read this project's [README.md](https://github.com/NicholasSynovic/shortstack/blob/main/README.md).
 
 ## Project Source Code and Published Link
 
