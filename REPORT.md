@@ -21,9 +21,28 @@
     - [Consistency Considerations](#consistency-considerations)
     - [Response to Midterm Feedback](#response-to-midterm-feedback)
     - [Interaction Patterns](#interaction-patterns)
-  - [Design Specification](#design-specification)
+  - [Design, Design Process, and Specification](#design-design-process-and-specification)
+    - [Design](#design)
+    - [Design Process](#design-process)
+    - [Specification](#specification)
   - [Testing and Iterative Design](#testing-and-iterative-design)
+    - [Testing](#testing)
+    - [Iterative Design](#iterative-design)
+      - [v0.1](#v01)
+      - [v0.2](#v02)
+      - [v0.3](#v03)
+      - [v0.4](#v04)
+      - [v0.5](#v05)
+      - [v0.6](#v06)
+      - [v0.7](#v07)
+      - [v0.8](#v08)
+      - [v0.9](#v09)
+      - [v1.0](#v10)
   - [Restrictions, Limitations, and Constraints](#restrictions-limitations-and-constraints)
+    - [Restrictions](#restrictions)
+    - [Limitations](#limitations)
+    - [Constraints](#constraints)
+    - [Features That I Failed To Complete](#features-that-i-failed-to-complete)
   - [Conclusion](#conclusion)
 
 ## Project Source Code and Published Link
@@ -88,7 +107,7 @@ The reason why I wanted to implement [PGP encryption](https://en.wikipedia.org/w
 
 As this was a chat application, no premade datasets were to be used in the application. Rather, the dataset that would be used would be the user generated chats.
 
-Example projects that I looked at were [Facebook](https://facebook.com), [Twitter](https://twitter.com), [Tumblr](https://tumblr.com/), [Android Messages](https://messages.google.com/), and [Proton Mail](https://protonmail.com/) (a PGP secured email client) for design and technical considerations.
+Example projects that I looked at were [Facebook](https://facebook.com), [Twitter](https://twitter.com), [Tumblr](https://tumblr.com/), [Android Messages](https://messages.google.com/), and [Proton Mail](https://protonmail.com/) (a [PGP](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) secured email client) for design and technical considerations.
 
 ### Primary Goal of the Homepage
 
@@ -114,7 +133,7 @@ Each page follows the same width, height, content placement, and containerizatio
 
 ### Response to Midterm Feedback
 
-After the midterm presentation, I rescoped the project into something that I feel is more manageable. I removed the - [PWA](https://en.wikipedia.org/wiki/Progressive_web_application)
+After the midterm presentation, I rescoped the project into something that I feel is more manageable. I removed the [PWA](https://en.wikipedia.org/wiki/Progressive_web_application)
  functionality, and put the [PGP encryption](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) of messages on the backburner. I then strongly focussed on creating as simple of a chat app as possible that included the following features:
 
 - Authentication with [Firebase Authentication](https://firebase.google.com/)
@@ -129,7 +148,7 @@ These changes reduced the technical debt that the site would take on as well as 
 
 ### Interaction Patterns
 
-There are two types of interation that occur within my site:
+There are two types of interation that occur within [ShortStack](https://nicholassynovic.github.io/shortstack):
 
 1. Automated interaction
 
@@ -149,7 +168,7 @@ All of these interactions in this catagory benefit from the Deferred pattern. Sp
 
 2. User interaction
 
-This is interaction that the user does on the site. This includes:
+This is interaction that the user does wihtin [ShortStack](https://nicholassynovic.github.io/shortstack). This includes:
 
 - Clicking buttons
 - Inputting text
@@ -165,10 +184,137 @@ Regarding the input elements on the sign in and sign up pages: the user has to i
 
 Should a user input a wrong value or encounter an error with the application (either on the client or [Firebase](https://firebase.google.com/) side of the application), an error report is shown to the user via a JavaScript alert element.
 
-## Design Specification
+## Design, Design Process, and Specification
+
+### Design
+
+I went with a less is more approach. I am a huge fan of the [lynx browser](http://lynx.browser.org/) and how it presents information with the barest amount of styling. Now, I can't expect people to access [ShortStack](https://nicholassynovic.github.io/shortstack) through a niche browser, so I did add some basic styling that allows the gives the site some color while also nicely spacing out elements.
+
+The design of chat messages is handled via [marked](https://marked.js.org/). I didn't configure the API to style the text in any particular manner as I prefer the default styling that it applies to content.
+
+### Design Process
+
+The general design philosophy looked like this algorithm:
+
+1. Research a feature that I want to add
+2. Implement feature
+3. Contemplate morally if that feature adds value to the application
+4. If true, reduce the code complexity of the feature to its simplest form (or what I am capable of doing)
+5. Else, scrap feature
+6. Finally, jump to 1
+
+This algorithm is a genralization of the design process as every feature required a slight tweak to complete it.
+
+### Specification
+
+I decided to format chat messages with Markdown for the sole reason that I love Markdown. I think it provides one of the most intuitive and easy to approach methods of styling text. I also believe that the applications that support Markdown rendering of messages such as [Reddit](https://reddit.com) and [GitHub Issues](https://github.com) provide users with a way to specify blocks of content easily without having the application build it in as an insertable widget. Furthermore, Markdown allows for HTML to be rendered as well. Therfore, users can share custom HTML snippets with one another via the Markdown renderer that is included in [ShortStack](https://nicholassynovic.github.io/shortstack)
 
 ## Testing and Iterative Design
 
+### Testing
+
+There was very little testing done with unit tests for [ShortStack](https://nicholassynovic.github.io/shortstack). The only tests that I had were webpack error reports.
+
+User stories were written out and those were tested by running through test cases that I designed.
+
+One of the problems with working alone is that I didn't recieve any feedback about the design of [ShortStack](https://nicholassynovic.github.io/shortstack) until my final presentation. Since then, I have implemented a better color scheme than what I presented. That is my only regret with deciding to work alone for this project.
+
+### Iterative Design
+
+This section will be described in terms of version numbers with version 1.0 being the version presented in class on 12/7/2021:
+
+#### v0.1
+
+- Inital version
+- Created [GitHub repository](https://github.com/NicholasSynovic/shortstack) and started messing around with creating [PWAs](https://en.wikipedia.org/wiki/Progressive_web_application)
+
+#### v0.2
+
+- Decided to focus on creating a chat application
+- Finalized basic installable [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) that ran on a client's device
+- Started work on learning how to access device notifications with a [PWA](https://en.wikipedia.org/wiki/Progressive_web_application)
+- Started looking at sites like [Facebook](https://facebook.com), [Twitter](https://twitter.com), [Tumblr](https://tumblr.com/), [Android Messages](https://messages.google.com/), and [Proton Mail](https://protonmail.com/)
+-
+#### v0.3
+
+- Midterm presentation
+- Started learning how to implement [OpenPGP.js](https://openpgpjs.org/) into the application
+
+#### v0.4
+
+- Scrapped work due to anxiety that was driven by the sheer scope of the HTML files
+- Began researching JavaScript HTML templating and components
+- Refocused efforts on just creating a chat application first and bolting on [PGP](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) and [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) support later
+
+#### v0.5
+
+- Reworked HTML and JavaScript to utilize components
+- Started learning [webpack](https://webpack.js.org/)
+- Started learning [Firebase](https://firebase.google.com/)
+
+#### v0.6
+
+- Learned enough [webpack](https://webpack.js.org/) to deploy site
+- Wrote [GitHub Action](https://github.com/) to publish site on `push` to GitHub Pages
+- Implemented basic [Firebase Authentication](https://firebase.google.com/) with email and password
+
+#### v0.7
+
+- Implemented basic [Firebase](https://firebase.google.com/) document publisher pattern
+- Implemented basic [Firebase](https://firebase.google.com/) collection observer pattern
+
+#### v0.8
+
+- Started work on the overall design on the site
+- Revisted [Android Messages](https://messages.google.com) and [Facebook](https://facebook.com) for inspiration and to see what not to do respectively
+- Started lookign at logos with a good color scheme that I could match the site to
+
+#### v0.9
+
+- Completed the overall design of the site
+- Started work on styling the chat component
+- Simplified JS to be as simple as possible
+
+#### v1.0
+
+- Final presentation of application
+- Completed styling the chat component
+- Implented color scheme based off of logo (post presentation)
+
 ## Restrictions, Limitations, and Constraints
 
+### Restrictions
+
+I didn't encounter any restrictions with the technologies that I planned to use or did use in developing [ShortStack](https://nicholassynovic.github.io/shortstack).
+
+### Limitations
+
+I was limited by time and other responsibilities in developing [ShortStack](https://nicholassynovic.github.io/shortstack). Again this is a challenge that arose purely from working alone and if I worked in a team I'm sure that the time constrained issues would have been resolved.
+
+Most of the time constrained issues had to do with the style of the application. However, the one non-style limitation that I ran into was developing a proper [Firebase](https://firebase.google.com/) query that only retrieved a specific users messages. Sadly, I just didn't have time to either work out the database schema or how to implement the query. To resolve this, the application fetches all documents from the collection and uses client side logic to resolve which documents should be presented to the end user.
+
+### Constraints
+
+I didn't run into any technical constraints while working on [ShortStack](https://nicholassynovic.github.io/shortstack).
+
+### Features That I Failed To Complete
+
+One of the features I wanted to add was a contact picker or a friends list. The reason why this was canned and didn't make it into the application was because there wasn't enough time to properly test it before the final presentation.
+
+Another feature was the [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) functionality. I canned this feature not because it was difficult to implement, but it added too much technical debt that I had to look out for while developing this application.
+
+A third proposed feature that I wanted to include but got canned was the [PGP](https://en.wikipedia.org/wiki/Pretty_Good_Privacy) encryption of messages. Similar to the [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) feature, this added too much technical debt that I was unprepared to take on, so I canned it.
+
 ## Conclusion
+
+I think my application, [ShortStack](https://nicholassynovic.github.io/shortstack), achieved all of the post-midterm goals it set out to meet. I think that this is probably the best website I have built, both technically and stylistically, using nothing but vanilla HTML, CSS, and JavaScript.
+
+If I were to go back and redo this application, I would use a CSS theme like [BootStrap](https://getbootstrap.com/) to style the page as it takes all of the pressure off of my to create my own custom styles.
+
+I would also spend more time looking into the [PWA](https://en.wikipedia.org/wiki/Progressive_web_application) feature. I do believe that in my applications current state, it is still possible for it to be a [PWA](https://en.wikipedia.org/wiki/Progressive_web_application). However, in order to meet the deadlines of the course, I decided to can the feature in favor of the core functionality which is to send one-to-one text messages to other users.
+
+The Markdown and HTML chat rendering that I built into the application is pretty cool as well. Without it, I would've had to implement all of that from scratch which would've been too much technical debt and probably would've been scrapped in favor of something else.
+
+Furthermore, the JavaScript templating and components that I came up with saved my butt and reduced my size anxiety whenever I look at HTML files. Having these repeated elements be loaded in on the fly I think is a pretty cool feature that sets my project apart from other work that I've done.
+
+I am happy with how my application turned out. It isn't perfect by any means, but it gets the job done. I look forward to expanding on it after this course ends.
