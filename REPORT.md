@@ -83,7 +83,7 @@ The reason why I wanted to implement PGP encryption was to both learn how to do 
 
 As this was a chat application, no premade datasets were to be used in the application. Rather, the dataset that would be used would be the user generated chats.
 
-Example projects that I looked at were Facebook Messenger, Twitter, Android Messages, and Proton Mail (a PGP secured email client) for design and technical considerations.
+Example projects that I looked at were Facebook Messenger, Twitter, Tumblr, Android Messages, and Proton Mail (a PGP secured email client) for design and technical considerations.
 
 ### Primary Goal of the Homepage
 
@@ -93,9 +93,71 @@ The true homepage of the application is the chat interface. This is only accessi
 
 ### Consistency Considerations
 
+I choose the following colors for my color scheme:
+
+- #55a1ff (light blue)
+- #ffc861 (light green)
+- #ffab61 (light red)
+
+These colors were selected because they were the colors of my application's icon.
+
+I tried to avoid including any graphics in the views, with the exception being the chat view. There a robot icon can be found at the top of the screen which is unique to each user. This is meant to be a distinguishing icon that can be used to track who sent what message. This icon is generated using the Dicebear Avatars API.
+
+Each page is as simple as it can be in terms of functionality. There is nothing extra or unnescary on each page as part of the design ethos of this application was to keep it as simple as possible.
+
+Each page follows the same width, height, content placement, and containerization of elements style guide. This is enforced via component specific css that is loaded into every page, as well as by keeping common elements as components that are loaded in after the HTML file is rendered. By utilizing components I can ensure that a component will look the same across multiple pages.
+
 ### Response to Midterm Feedback
 
+After the midterm presentation, I rescoped the project into something that I feel is more manageable. I removed the PWA functionality, and put the PGP encryption of messages on the backburner. I then strongly focussed on creating as simple of a chat app as possible that included the following features:
+
+- Authentication features
+- One-to-one messaging
+- Unique user avatars
+- Markdown and HTML rendering of messages
+- Cloud storage via Firebase Firestore Collections
+
+With the project rescoped to include only whats listed above, I was able to create a project that is both easily extensible and can be used as a template to others as to what a chat application can be.
+
+These changes reduced the technical debt that the site would take on as well as to allow me to iterate quickly through ideas and prototypes with little concern that I would have to redevelop the site. As someone who worked on this project alone, quick iteration was key to the success of this application.
+
 ### Interaction Patterns
+
+There are two types of interation that occur within my site:
+
+1. Automated interaction
+
+This is interaction that is done by the site at runtime. This includes:
+
+- Rending components
+- Firebase Authentication
+- Firebase Firestore store and request calls
+- Markdown and HTML of messages rendering
+
+All of these interactions in this catagory benefit from the Deferred pattern. Specifically:
+
+- Markdown and HTML message rendering doesn't occur until there is a message to render
+- Firebase calls are all asynchronus
+- All components are rendered on the page after the HTML file has been rendered in the browser
+- I utilized webpack to bundle npm packages for this application and it loads the bundled bundle.js file after the page has been rendered
+
+2. User interaction
+
+This is interaction that the user does on the site. This includes:
+
+- Clicking buttons
+- Inputting text
+
+These interactions are all handled by standard HTML elements including:
+
+- form
+- button
+- input
+- textarea
+
+Regarding the input elements on the sign in and sign up pages: the user has to input an email and password to log into the application. To enforce that an email address is typed into the email input and a password is typed into the password input, I set the types of those inputs to email and password respectively. Also, both in my application and in the applications Firebase Authentication store, a password of 6 charachters or more has to be inputted for it to be a valid password.
+
+Should a user input a wrong value or encounter an error with the application (either on the client or Firebase side of the application), an error report is shown to the user via a JavaScript alert element.
 
 ## Design Specification
 
