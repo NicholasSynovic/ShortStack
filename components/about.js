@@ -17,3 +17,12 @@ function about() {
     `
     aboutContainer.appendChild(template.content)
 }
+
+function forkMeOnGitHub() {
+    const root = document.getElementById("root")
+    const template = document.createElement("template")
+
+    template.innerHTML = `<a class="github-fork-ribbon" href="https://github.com/NicholasSynovic/shortstack" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>`
+
+    root.appendChild(template.content)
+}

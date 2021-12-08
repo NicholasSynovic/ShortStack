@@ -14,7 +14,7 @@ body    {
     padding: 1vw;
     margin: 1vw;
     border-radius: 1vw;
-    border-color: blue;
+    border-color: #55a1ff;
     border-style: solid;
 }
 
@@ -22,7 +22,7 @@ body    {
     height: 77vh;
     width: 100%;
     border-radius: 1vw;
-    border-color: black;
+    border-color: #ffc861;
     border-style: solid;
 }
 
@@ -42,7 +42,7 @@ body    {
     width: 100%;
     height: fit-content;
     text-align: left;
-    border: 1px solid red;
+    border: 1px solid #ffab61;
     overflow-y: auto;
     margin-top: 1vh;
     margin-bottom: 1vh;
@@ -52,7 +52,7 @@ body    {
     width: 100%;
     height: fit-content;
     text-align: left;
-    border: 1px solid red;
+    border: 1px solid #ffab61;
     overflow-y: auto;
     margin-top: 1vh;
     margin-bottom: 1vh;
