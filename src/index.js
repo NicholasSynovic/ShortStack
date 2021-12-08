@@ -3,7 +3,6 @@ import { initializeApp } from "firebase/app"
 import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth"
 import { getFirestore, collection, addDoc, getDocsFromServer, query, serverTimestamp, orderBy, Timestamp, onSnapshot, limit } from "firebase/firestore"
 import { marked } from "marked"
-// import DOMPurify from "dompurify"
 
 // Firebase config
 const firebaseConfig = {
