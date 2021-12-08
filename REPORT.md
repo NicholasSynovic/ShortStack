@@ -87,7 +87,9 @@ Example projects that I looked at were Facebook Messenger, Twitter, Android Mess
 
 ### Primary Goal of the Homepage
 
-The primary goal of the homepage is to host the sign in and up buttons. The only content on the page is meant to direct users to the
+The primary goal of the homepage is to host the sign in and up buttons. The only content on the page is meant to direct users to the GitHub repository (via the ribbon that appears on all pages on the desktop version of the site), present the title, logo, and other metadata about the site.
+
+The true homepage of the application is the chat interface. This is only accessible in a working state once the user logs in. This interface presents the chat window, an option to sign out, a clickable header that will take you back to the page described above, a button to send messages, and a textbox and textarea element. The textbox is to input the recipients email address, and the textarea is to input the message to send to the recipient.
 
 ### Consistency Considerations
 
