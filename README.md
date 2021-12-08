@@ -13,7 +13,7 @@
 1. This site doesn't use any content management systems
 2. This site is built entirely with my own HTML, CSS, and JS
 
-- webpack was used to wrap npm modules up for deployment 
+- webpack was used to wrap npm modules up for deployment
 
 4. No CSS frameworks were used
 5. No CSS preprocessors were used
@@ -26,7 +26,7 @@
 - I built my own templating tool to handle different components of the application (written entirely in JS)
 
 8. Data is hosted using Firebase
-9. Implemented the markedJS and DOMPurify APIs for custom text processing
+9. Implemented the markedJS API for custom text processing
 10. Implemented the Dicebear Avatars API for random custom avatars
 11. No SQL code was used
 
@@ -48,7 +48,7 @@
 3. Have a robot do it for me
 
 - This site is hosted on GitHub Pages and uses a GH action to build the site on commits.
-- This site utilized webpack to bundle the necessary dependencies for the application. 
+- This site utilized webpack to bundle the necessary dependencies for the application.
 
 ### Analysis of Work
 
@@ -87,7 +87,6 @@ I relied on the work of those within the CS community to teach me the necessary 
 - [Spectral Font](https://fonts.google.com/specimen/Spectral#standard-styles) by *Production Type*
 - [Karla Font](https://fonts.google.com/specimen/Karla) by *Jonny Pinhorn*
 - [Marked](https://marked.js.org/)
-- [DOMPurify](https://cure53.de/purify)
 
 ### Resources
 
