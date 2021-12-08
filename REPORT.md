@@ -87,6 +87,8 @@ Example projects that I looked at were Facebook Messenger, Twitter, Android Mess
 
 ### Primary Goal of the Homepage
 
+The primary goal of the homepage is to host the sign in and up buttons. The only content on the page is meant to direct users to the
+
 ### Consistency Considerations
 
 ### Response to Midterm Feedback
