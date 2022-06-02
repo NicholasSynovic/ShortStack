@@ -2,7 +2,7 @@
   "dependencies": {
     "firebase": "^9.5.0",
     "marked": "^4.0.6",
-    "npm": "^8.1.4"
+    "npm": "^8.11.0"
   },
   "name": "shortstack",
   "description": "## Notes About This Application",
